@@ -76,7 +76,7 @@ h1 {
     transform: rotateY(180deg);
 }
 
-.flip-card-inner img {
+.flip-card-inner .flip-card-back img {
     cursor: pointer;
 }
 
@@ -91,4 +91,6 @@ h1 {
     object-fit: cover;
 }
 
-
+.fixed:hover {
+    cursor: normal;
+}

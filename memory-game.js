@@ -78,19 +78,21 @@ console.log(cards);
 cards.forEach((card) =>
   card.addEventListener("click", (event) => {
         if (currentSelectedCard.length !== 2) {
-            const inner = card.querySelector(".flip-card-inner");
+            const inner = card.querySelector('.flip-card-inner')
+            if (!inner.classList.contains('fixed')) {
+                const inner = card.querySelector(".flip-card-inner");
 
-            if (!inner.classList.contains("rotate")) {
-            inner.classList.add("rotate");
-            } else {
-            inner.classList.remove("rotate");
+                if (!inner.classList.contains("rotate")) {
+                inner.classList.add("rotate");
+                } else {
+                inner.classList.remove("rotate");
+                }
+    
+                currentSelectedCard.push(card)
+                if (currentSelectedCard.length === 2) {
+                    setTimeout(800)
+                }
             }
-
-            currentSelectedCard.push(card)
-            if (currentSelectedCard.length === 2) {
-                setTimeout(800)
-            }
-
         }
 
 
@@ -105,6 +107,10 @@ cards.forEach((card) =>
                     inner2.classList.remove("rotate");
                 }
 
+                else {
+                    inner1.classList.add("fixed")
+                    inner2.classList.add("fixed")
+                }
                 currentSelectedCard = []
             }, 800)
             
