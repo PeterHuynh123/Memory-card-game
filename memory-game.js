@@ -42,8 +42,6 @@ for (let i = 0; i < 3; i++) {
     }
 }
 
-console.log(gameBoard)
-
 cardGrid.innerHTML = ''
 
 for (let i = 0; i < 3; i++) {
@@ -72,8 +70,6 @@ for (let i = 0; i < 3; i++) {
 
    
 const cards = document.querySelectorAll(".flip-card");
- 
-console.log(cards);
 
 cards.forEach((card) =>
   card.addEventListener("click", (event) => {
@@ -89,9 +85,6 @@ cards.forEach((card) =>
                 }
     
                 currentSelectedCard.push(card)
-                if (currentSelectedCard.length === 2) {
-                    setTimeout(800)
-                }
             }
         }
 
@@ -102,6 +95,7 @@ cards.forEach((card) =>
                 const inner1 = currentSelectedCard[0].querySelector(".flip-card-inner")
                 const inner2 = currentSelectedCard[1].querySelector(".flip-card-inner")
 
+                // console.log(inner1.classList[1], inner2.classList[1])
                 if (!(inner1.classList[1] === inner2.classList[1])) {
                     inner1.classList.remove("rotate");
                     inner2.classList.remove("rotate");
@@ -112,7 +106,7 @@ cards.forEach((card) =>
                     inner2.classList.add("fixed")
                 }
                 currentSelectedCard = []
-            }, 800)
+            }, 700)
             
         }
   })
