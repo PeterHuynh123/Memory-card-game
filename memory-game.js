@@ -1,40 +1,113 @@
-const cards = document.querySelectorAll(".card")
-let cardsArray = [[]]
+const cardGrid = document.querySelector('.card-grid')
 
-let addCardCounter = 0 
+// const AGENT = ['jett', 'chamber', 'yoru', 'omen', 'harbor', 'reyna']
+let AGENTS = ['jett', 'chamber', 'yoru', 'omen', 'harbor', 'reyna', 'jett', 'chamber', 'yoru', 'omen', 'harbor', 'reyna']
+let currentSelectedCard = []
+// const newElement = document.createElement('p')
+// newElement.innerHTML = 'hello this p is created using Js'
+// cardGrid.appendChild(newElement)
 
-// for(let i = 0; i < 5; i++) {
-//     for(let k = 0; k < 4; k++) {
-//         cardsArray[i].push(cards[addCardCounter])
-//         addCardCounter ++
-//     }
-//     console.log(cardsArray)
-// }
+const gameBoard = [
+    [],
+    [],
+    []
+]
 
+const createCard = (id, agent) =>  `
+    <div class="flip-card" id="card-${id}">
+    <div class="flip-card-inner ${agent}">
+        <div class="flip-card-back">
+            <img src="./assets/card_normal.png" draggable="false">
+        </div>
+        <div class="flip-card-front">
+            <img src="./assets/cardToChoose/${agent}.png"
+                alt="Avatar" draggable="false">
+        </div>
+    </div>
+`
 
+let agentCounter = 0
+let agentIndexCount = 0
 
+for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 2; j++) {
+        for (let k = 0; k < 2; k++) {
+            const newCard = createCard(agentIndexCount, AGENTS[agentCounter])
+            gameBoard[i].push(AGENTS[agentCounter])
+            cardGrid.innerHTML += newCard
 
-cards.forEach((card, index) => {
-    card.addEventListener("click", e => {
-        // console.log(card.classList, index)
-        // if (card.classList.contains("card-front")) {
-        //     card.className = "card-back"
-        //     img.src = "https://cdn.vox-cdn.com/thumbor/eNOhiVdnvnyYEv_9kIw1IABEyZI=/0x0:3011x1447/1400x933/filters:focal(1123x329:1603x809):no_upscale()/cdn.vox-cdn.com/uploads/chorus_image/image/66954486/VALORANT_Jett_Red_crop.0.jpg"   
-        //     // card.style.transform = "transform: rotateY(180deg);" 
-        // } else if (card.classList.contains("card-back")){
-        //     card.className = "card-front"
-        //     img.src = "./assets/card_normal.png"
-        // }
-        const inner = card.querySelector(".card-inner")
-
-        if (!card.classList.contains('rotate')) {
-            inner.classList.add('rotate')
+            agentIndexCount ++
         }
-        else {
-            inner.classList.remove('rotate')
+        agentCounter ++
+    }
+}
+
+console.log(gameBoard)
+
+cardGrid.innerHTML = ''
+
+for (let i = 0; i < 3; i++) {
+    for (let k = 0; k < 4; k++) {
+        const randRowIndex = Math.floor(Math.random() * 3)
+        const randCollumnIndex = Math.floor(Math.random() * 4)
+
+        let tempHolder = gameBoard[i][k]
+
+        gameBoard[i][k] = gameBoard[randRowIndex][randCollumnIndex]
+        gameBoard[randRowIndex][randCollumnIndex] = tempHolder
+
+        cardGrid.innerHTML += gameBoard[i][k]
+    }
+}
+
+let secondAgentIndexCounter = 0
+cardGrid.innerHTML = ''
+
+for (let i = 0; i < 3; i++) {
+    for (let k = 0; k < 4; k++) {
+        cardGrid.innerHTML += createCard(secondAgentIndexCounter, gameBoard[i][k])
+        secondAgentIndexCounter ++
+    }
+}
+
+   
+const cards = document.querySelectorAll(".flip-card");
+ 
+console.log(cards);
+
+cards.forEach((card) =>
+  card.addEventListener("click", (event) => {
+        if (currentSelectedCard.length !== 2) {
+            const inner = card.querySelector(".flip-card-inner");
+
+            if (!inner.classList.contains("rotate")) {
+            inner.classList.add("rotate");
+            } else {
+            inner.classList.remove("rotate");
+            }
+
+            currentSelectedCard.push(card)
+            if (currentSelectedCard.length === 2) {
+                setTimeout(800)
+            }
+
         }
 
-        console.log('hi')
-    })
-})
 
+
+        if (currentSelectedCard.length === 2) {
+            setTimeout(() => {
+                const inner1 = currentSelectedCard[0].querySelector(".flip-card-inner")
+                const inner2 = currentSelectedCard[1].querySelector(".flip-card-inner")
+
+                if (!(inner1.classList[1] === inner2.classList[1])) {
+                    inner1.classList.remove("rotate");
+                    inner2.classList.remove("rotate");
+                }
+
+                currentSelectedCard = []
+            }, 800)
+            
+        }
+  })
+);

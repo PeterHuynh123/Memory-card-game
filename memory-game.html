@@ -1,241 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <link rel="stylesheet" href="memory-game.css">
-    <!-- <style>
-        .normal {
-            color: yellow;
-        }
-
-        .active {
-            color: red;
-        }
-
-        .bold {
-            font-weight: bold;
-            font-size: 50px;
-        }
-    </style> -->
+    <title>Memory game</title>
 </head>
+
 <body>
-    <div id="header">
-        <h1>Memory game</h1>
-    </div>
-    <section id="cards-section">
-        <div class="card" id="card-0">
-            <div class="card-inner">
-                <div class="card-front">
-                    <img src="./assets/card_normal.png" alt="">
+    <h1>Memory game</h1>
+
+    <div class="container">
+        <div class="card-grid">
+            <!-- <div class="flip-card" id="card-1">
+            <div class="flip-card-inner">
+                <div class="flip-card-back">
+                    <img src="./assets/card_normal.png" draggable="false">
                 </div>
-                <div class="card-back">
-                    <img src="https://cdn.vox-cdn.com/thumbor/eNOhiVdnvnyYEv_9kIw1IABEyZI=/0x0:3011x1447/1400x933/filters:focal(1123x329:1603x809):no_upscale()/cdn.vox-cdn.com/uploads/chorus_image/image/66954486/VALORANT_Jett_Red_crop.0.jpg" alt="">
-                </div>
-            </div>
-        </div>
-        <div class="card" id="card-1">
-            <div class="card-inner">
-                <div class="card-front">
-                    <img src="./assets/card_normal.png" alt="">
-                </div>
-                <div class="card-back">
-                    <img src="https://cdn.vox-cdn.com/thumbor/eNOhiVdnvnyYEv_9kIw1IABEyZI=/0x0:3011x1447/1400x933/filters:focal(1123x329:1603x809):no_upscale()/cdn.vox-cdn.com/uploads/chorus_image/image/66954486/VALORANT_Jett_Red_crop.0.jpg" alt="">
+                <div class="flip-card-front">
+                    <img src="./assets/cardToChoose/chamber.png"
+                        alt="Avatar" draggable="false">
                 </div>
             </div>
         </div>
-        <!-- <div class="card" id="card-2">
-            <div class="card-inner">
-                <div class="card-front">
-                    <img src="./assets/card_normal.png" alt="">
+         -->
+        <!-- <div class="flip-card" id="card-1">
+            <div class="flip-card-inner">
+                <div class="flip-card-back">
+                    <img src="./assets/card_normal.png" draggable="false">
                 </div>
-                <div class="card-back">
-                    <img src="https://cdn.vox-cdn.com/thumbor/eNOhiVdnvnyYEv_9kIw1IABEyZI=/0x0:3011x1447/1400x933/filters:focal(1123x329:1603x809):no_upscale()/cdn.vox-cdn.com/uploads/chorus_image/image/66954486/VALORANT_Jett_Red_crop.0.jpg" alt="">
-                </div>
-            </div>
-        </div>
-        <div class="card" id="card-3">
-            <div class="card-inner">
-                <div class="card-front">
-                    <img src="./assets/card_normal.png" alt="">
-                </div>
-                <div class="card-back">
-                    <img src="https://cdn.vox-cdn.com/thumbor/eNOhiVdnvnyYEv_9kIw1IABEyZI=/0x0:3011x1447/1400x933/filters:focal(1123x329:1603x809):no_upscale()/cdn.vox-cdn.com/uploads/chorus_image/image/66954486/VALORANT_Jett_Red_crop.0.jpg" alt="">
+                <div class="flip-card-front">
+                    <img src="./assets/cardToChoose/jett.png"
+                        alt="Avatar" draggable="false">
                 </div>
             </div>
         </div>
-        <div class="card" id="card-4">
-            <div class="card-inner">
-                <div class="card-front">
-                    <img src="./assets/card_normal.png" alt="">
+
+        <div class="flip-card" id="card-1">
+            <div class="flip-card-inner">
+                <div class="flip-card-back">
+                    <img src="./assets/card_normal.png" draggable="false">
                 </div>
-                <div class="card-back">
-                    <img src="https://cdn.vox-cdn.com/thumbor/eNOhiVdnvnyYEv_9kIw1IABEyZI=/0x0:3011x1447/1400x933/filters:focal(1123x329:1603x809):no_upscale()/cdn.vox-cdn.com/uploads/chorus_image/image/66954486/VALORANT_Jett_Red_crop.0.jpg" alt="">
-                </div>
-            </div>
-        </div>
-        <div class="card" id="card-5">
-            <div class="card-inner">
-                <div class="card-front">
-                    <img src="./assets/card_normal.png" alt="">
-                </div>
-                <div class="card-back">
-                    <img src="https://cdn.vox-cdn.com/thumbor/eNOhiVdnvnyYEv_9kIw1IABEyZI=/0x0:3011x1447/1400x933/filters:focal(1123x329:1603x809):no_upscale()/cdn.vox-cdn.com/uploads/chorus_image/image/66954486/VALORANT_Jett_Red_crop.0.jpg" alt="">
+                <div class="flip-card-front">
+                    <img src="./assets/cardToChoose/jett.png"
+                        alt="Avatar" draggable="false">
                 </div>
             </div>
         </div>
-        <div class="card" id="card-6">
-            <div class="card-inner">
-                <div class="card-front">
-                    <img src="./assets/card_normal.png" alt="">
+
+        <div class="flip-card" id="card-1">
+            <div class="flip-card-inner">
+                <div class="flip-card-back">
+                    <img src="./assets/card_normal.png" draggable="false">
                 </div>
-                <div class="card-back">
-                    <img src="https://cdn.vox-cdn.com/thumbor/eNOhiVdnvnyYEv_9kIw1IABEyZI=/0x0:3011x1447/1400x933/filters:focal(1123x329:1603x809):no_upscale()/cdn.vox-cdn.com/uploads/chorus_image/image/66954486/VALORANT_Jett_Red_crop.0.jpg" alt="">
-                </div>
-            </div>
-        </div>
-        <div class="card" id="card-7">
-            <div class="card-inner">
-                <div class="card-front">
-                    <img src="./assets/card_normal.png" alt="">
-                </div>
-                <div class="card-back">
-                    <img src="https://cdn.vox-cdn.com/thumbor/eNOhiVdnvnyYEv_9kIw1IABEyZI=/0x0:3011x1447/1400x933/filters:focal(1123x329:1603x809):no_upscale()/cdn.vox-cdn.com/uploads/chorus_image/image/66954486/VALORANT_Jett_Red_crop.0.jpg" alt="">
+                <div class="flip-card-front">
+                    <img src="./assets/cardToChoose/jett.png"
+                        alt="Avatar" draggable="false">
                 </div>
             </div>
         </div>
-        <div class="card" id="card-8">
-            <div class="card-inner">
-                <div class="card-front">
-                    <img src="./assets/card_normal.png" alt="">
+
+        <div class="flip-card" id="card-1">
+            <div class="flip-card-inner">
+                <div class="flip-card-back">
+                    <img src="./assets/card_normal.png" draggable="false">
                 </div>
-                <div class="card-back">
-                    <img src="https://cdn.vox-cdn.com/thumbor/eNOhiVdnvnyYEv_9kIw1IABEyZI=/0x0:3011x1447/1400x933/filters:focal(1123x329:1603x809):no_upscale()/cdn.vox-cdn.com/uploads/chorus_image/image/66954486/VALORANT_Jett_Red_crop.0.jpg" alt="">
-                </div>
-            </div>
-        </div>
-        <div class="card" id="card-90">
-            <div class="card-inner">
-                <div class="card-front">
-                    <img src="./assets/card_normal.png" alt="">
-                </div>
-                <div class="card-back">
-                    <img src="https://cdn.vox-cdn.com/thumbor/eNOhiVdnvnyYEv_9kIw1IABEyZI=/0x0:3011x1447/1400x933/filters:focal(1123x329:1603x809):no_upscale()/cdn.vox-cdn.com/uploads/chorus_image/image/66954486/VALORANT_Jett_Red_crop.0.jpg" alt="">
+                <div class="flip-card-front">
+                    <img src="./assets/cardToChoose/jett.png"
+                        alt="Avatar" draggable="false">
                 </div>
             </div>
         </div>
-        <div class="card" id="card-10">
-            <div class="card-inner">
-                <div class="card-front">
-                    <img src="./assets/card_normal.png" alt="">
+
+        <div class="flip-card" id="card-1">
+            <div class="flip-card-inner">
+                <div class="flip-card-back">
+                    <img src="./assets/card_normal.png" draggable="false">
                 </div>
-                <div class="card-back">
-                    <img src="https://cdn.vox-cdn.com/thumbor/eNOhiVdnvnyYEv_9kIw1IABEyZI=/0x0:3011x1447/1400x933/filters:focal(1123x329:1603x809):no_upscale()/cdn.vox-cdn.com/uploads/chorus_image/image/66954486/VALORANT_Jett_Red_crop.0.jpg" alt="">
-                </div>
-            </div>
-        </div>
-        <div class="card" id="card-11">
-            <div class="card-inner">
-                <div class="card-front">
-                    <img src="./assets/card_normal.png" alt="">
-                </div>
-                <div class="card-back">
-                    <img src="https://cdn.vox-cdn.com/thumbor/eNOhiVdnvnyYEv_9kIw1IABEyZI=/0x0:3011x1447/1400x933/filters:focal(1123x329:1603x809):no_upscale()/cdn.vox-cdn.com/uploads/chorus_image/image/66954486/VALORANT_Jett_Red_crop.0.jpg" alt="">
+                <div class="flip-card-front">
+                    <img src="./assets/cardToChoose/jett.png"
+                        alt="Avatar" draggable="false">
                 </div>
             </div>
         </div>
-        <div class="card" id="card-12">
-            <div class="card-inner">
-                <div class="card-front">
-                    <img src="./assets/card_normal.png" alt="">
+        <div class="flip-card" id="card-1">
+            <div class="flip-card-inner">
+                <div class="flip-card-back">
+                    <img src="./assets/card_normal.png" draggable="false">
                 </div>
-                <div class="card-back">
-                    <img src="https://cdn.vox-cdn.com/thumbor/eNOhiVdnvnyYEv_9kIw1IABEyZI=/0x0:3011x1447/1400x933/filters:focal(1123x329:1603x809):no_upscale()/cdn.vox-cdn.com/uploads/chorus_image/image/66954486/VALORANT_Jett_Red_crop.0.jpg" alt="">
-                </div>
-            </div>
-        </div>
-        <div class="card" id="card-13">
-            <div class="card-inner">
-                <div class="card-front">
-                    <img src="./assets/card_normal.png" alt="">
-                </div>
-                <div class="card-back">
-                    <img src="https://cdn.vox-cdn.com/thumbor/eNOhiVdnvnyYEv_9kIw1IABEyZI=/0x0:3011x1447/1400x933/filters:focal(1123x329:1603x809):no_upscale()/cdn.vox-cdn.com/uploads/chorus_image/image/66954486/VALORANT_Jett_Red_crop.0.jpg" alt="">
+                <div class="flip-card-front">
+                    <img src="./assets/cardToChoose/jett.png"
+                        alt="Avatar" draggable="false">
                 </div>
             </div>
         </div>
-        <div class="card" id="card-14">
-            <div class="card-inner">
-                <div class="card-front">
-                    <img src="./assets/card_normal.png" alt="">
+
+        <div class="flip-card" id="card-1">
+            <div class="flip-card-inner">
+                <div class="flip-card-back">
+                    <img src="./assets/card_normal.png" draggable="false">
                 </div>
-                <div class="card-back">
-                    <img src="https://cdn.vox-cdn.com/thumbor/eNOhiVdnvnyYEv_9kIw1IABEyZI=/0x0:3011x1447/1400x933/filters:focal(1123x329:1603x809):no_upscale()/cdn.vox-cdn.com/uploads/chorus_image/image/66954486/VALORANT_Jett_Red_crop.0.jpg" alt="">
-                </div>
-            </div>
-        </div>
-        <div class="card" id="card-15">
-            <div class="card-inner">
-                <div class="card-front">
-                    <img src="./assets/card_normal.png" alt="">
-                </div>
-                <div class="card-back">
-                    <img src="https://cdn.vox-cdn.com/thumbor/eNOhiVdnvnyYEv_9kIw1IABEyZI=/0x0:3011x1447/1400x933/filters:focal(1123x329:1603x809):no_upscale()/cdn.vox-cdn.com/uploads/chorus_image/image/66954486/VALORANT_Jett_Red_crop.0.jpg" alt="">
+                <div class="flip-card-front">
+                    <img src="./assets/cardToChoose/jett.png"
+                        alt="Avatar" draggable="false">
                 </div>
             </div>
         </div>
-        <div class="card" id="card-16">
-            <div class="card-inner">
-                <div class="card-front">
-                    <img src="./assets/card_normal.png" alt="">
+        <div class="flip-card" id="card-1">
+            <div class="flip-card-inner">
+                <div class="flip-card-back">
+                    <img src="./assets/card_normal.png" draggable="false">
                 </div>
-                <div class="card-back">
-                    <img src="https://cdn.vox-cdn.com/thumbor/eNOhiVdnvnyYEv_9kIw1IABEyZI=/0x0:3011x1447/1400x933/filters:focal(1123x329:1603x809):no_upscale()/cdn.vox-cdn.com/uploads/chorus_image/image/66954486/VALORANT_Jett_Red_crop.0.jpg" alt="">
-                </div>
-            </div>
-        </div>
-        <div class="card" id="card-17">
-            <div class="card-inner">
-                <div class="card-front">
-                    <img src="./assets/card_normal.png" alt="">
-                </div>
-                <div class="card-back">
-                    <img src="https://cdn.vox-cdn.com/thumbor/eNOhiVdnvnyYEv_9kIw1IABEyZI=/0x0:3011x1447/1400x933/filters:focal(1123x329:1603x809):no_upscale()/cdn.vox-cdn.com/uploads/chorus_image/image/66954486/VALORANT_Jett_Red_crop.0.jpg" alt="">
+                <div class="flip-card-front">
+                    <img src="./assets/cardToChoose/jett.png"
+                        alt="Avatar" draggable="false">
                 </div>
             </div>
         </div>
-        <div class="card" id="card-18">
-            <div class="card-inner">
-                <div class="card-front">
-                    <img src="./assets/card_normal.png" alt="">
+        <div class="flip-card" id="card-1">
+            <div class="flip-card-inner">
+                <div class="flip-card-back">
+                    <img src="./assets/card_normal.png" draggable="false">
                 </div>
-                <div class="card-back">
-                    <img src="https://cdn.vox-cdn.com/thumbor/eNOhiVdnvnyYEv_9kIw1IABEyZI=/0x0:3011x1447/1400x933/filters:focal(1123x329:1603x809):no_upscale()/cdn.vox-cdn.com/uploads/chorus_image/image/66954486/VALORANT_Jett_Red_crop.0.jpg" alt="">
+                <div class="flip-card-front">
+                    <img src="./assets/cardToChoose/jett.png"
+                        alt="Avatar" draggable="false">
                 </div>
             </div>
         </div>
-        <div class="card" id="card-19">
-            <div class="card-inner">
-                <div class="card-front">
-                    <img src="./assets/card_normal.png" alt="">
+
+        <div class="flip-card" id="card-1">
+            <div class="flip-card-inner">
+                <div class="flip-card-back">
+                    <img src="./assets/card_normal.png" draggable="false">
                 </div>
-                <div class="card-back">
-                    <img src="https://cdn.vox-cdn.com/thumbor/eNOhiVdnvnyYEv_9kIw1IABEyZI=/0x0:3011x1447/1400x933/filters:focal(1123x329:1603x809):no_upscale()/cdn.vox-cdn.com/uploads/chorus_image/image/66954486/VALORANT_Jett_Red_crop.0.jpg" alt="">
+                <div class="flip-card-front">
+                    <img src="./assets/cardToChoose/jett.png"
+                        alt="Avatar" draggable="false">
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card" id="card-1">
+            <div class="flip-card-inner">
+                <div class="flip-card-back">
+                    <img src="./assets/card_normal.png" draggable="false">
+                </div>
+                <div class="flip-card-front">
+                    <img src="./assets/cardToChoose/jett.png"
+                        alt="Avatar" draggable="false">
                 </div>
             </div>
         </div> -->
-
-    </section>
-    
-
-    <!-- <script>
-        const h1 = document.querySelector('h1')
-        h1.addEventListener('click', e => {
-            h1.className = 'active bold'
-        })
-    </script> -->
-
-    <script src="memory-game.js"></script>
+        
+        </div>
+        
+    </div>
+    </div>
 </body>
+
+<script src="memory-game.js"></script>
+
 </html>
