@@ -13,9 +13,9 @@ const gameBoard = [
     []
 ]
 
-const createCard = (id, agent) =>  `
+const createCard = (id, agent) => `
     <div class="flip-card" id="card-${id}">
-    <div class="flip-card-inner ${agent}">
+    <div class="flip-card-inner ${agent}" id="${id}">
         <div class="flip-card-back">
             <img src="./assets/card_normal.png" draggable="false">
         </div>
@@ -36,9 +36,9 @@ for (let i = 0; i < 3; i++) {
             gameBoard[i].push(AGENTS[agentCounter])
             cardGrid.innerHTML += newCard
 
-            agentIndexCount ++
+            agentIndexCount++
         }
-        agentCounter ++
+        agentCounter++
     }
 }
 
@@ -64,27 +64,39 @@ cardGrid.innerHTML = ''
 for (let i = 0; i < 3; i++) {
     for (let k = 0; k < 4; k++) {
         cardGrid.innerHTML += createCard(secondAgentIndexCounter, gameBoard[i][k])
-        secondAgentIndexCounter ++
+        secondAgentIndexCounter++
     }
 }
 
-   
+
 const cards = document.querySelectorAll(".flip-card");
 
 cards.forEach((card) =>
-  card.addEventListener("click", (event) => {
-        if (currentSelectedCard.length !== 2) {
-            const inner = card.querySelector('.flip-card-inner')
+    card.addEventListener("click", (event) => {
+        const flipCard = function (inner) {
             if (!inner.classList.contains('fixed')) {
                 const inner = card.querySelector(".flip-card-inner");
 
                 if (!inner.classList.contains("rotate")) {
-                inner.classList.add("rotate");
+                    inner.classList.add("rotate");
                 } else {
-                inner.classList.remove("rotate");
+                    inner.classList.remove("rotate");
                 }
-    
+
                 currentSelectedCard.push(card)
+            }
+        }
+
+        if (currentSelectedCard.length !== 2) {
+            const inner2 = card.querySelector('.flip-card-inner')
+            if (currentSelectedCard.length === 1) {
+                const inner1 = currentSelectedCard[0].querySelector(".flip-card-inner")
+                if (inner1.id !== inner2.id) {
+                    flipCard(inner2)
+                }
+            }
+            else {
+                flipCard(inner2)
             }
         }
 
@@ -107,7 +119,7 @@ cards.forEach((card) =>
                 }
                 currentSelectedCard = []
             }, 700)
-            
+
         }
-  })
+    })
 );
