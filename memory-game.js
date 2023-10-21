@@ -1,4 +1,37 @@
 const cardGrid = document.querySelector('.card-grid')
+const timer = document.querySelector('#timer')
+const timerBox = document.querySelector('#timer-box')
+
+const milisec = 10
+const playTime = 30 * milisec
+let currentPlayTime = playTime
+let gameIsRunning = true
+let gameCompleted = false
+
+const setIntervalfunction = setInterval(() => {
+    if (currentPlayTime != -1) {
+        timer.textContent = `${(currentPlayTime/milisec).toFixed(1)}`;
+        currentPlayTime -= 1
+        timerBox.style.width =  `${(currentPlayTime/playTime)*100}vw` 
+    }
+    else {
+        timer.textContent = "TIMEOUT"
+        return false
+    }
+    
+    return true
+    
+}, 100)
+
+// setInterval(() => {
+//     timerBox.style.width = `${Math.floor((currentPlayTime/playTime*100)*100)}vw`
+// }, 1)
+
+
+if (gameIsRunning) {
+    gameIsRunning = setIntervalfunction
+}
+
 
 // const AGENT = ['jett', 'chamber', 'yoru', 'omen', 'harbor', 'reyna']
 let AGENTS = ['jett', 'chamber', 'yoru', 'omen', 'harbor', 'reyna', 'jett', 'chamber', 'yoru', 'omen', 'harbor', 'reyna']
@@ -69,57 +102,61 @@ for (let i = 0; i < 3; i++) {
 }
 
 
+
+
 const cards = document.querySelectorAll(".flip-card");
 
 cards.forEach((card) =>
     card.addEventListener("click", (event) => {
-        const flipCard = function (inner) {
-            if (!inner.classList.contains('fixed')) {
-                const inner = card.querySelector(".flip-card-inner");
-
-                if (!inner.classList.contains("rotate")) {
-                    inner.classList.add("rotate");
-                } else {
-                    inner.classList.remove("rotate");
+        if (gameIsRunning) {
+            const flipCard = function (inner) {
+                if (!inner.classList.contains('fixed')) {
+                    const inner = card.querySelector(".flip-card-inner");
+    
+                    if (!inner.classList.contains("rotate")) {
+                        inner.classList.add("rotate");
+                    } else {
+                        inner.classList.remove("rotate");
+                    }
+    
+                    currentSelectedCard.push(card)
                 }
-
-                currentSelectedCard.push(card)
             }
-        }
-
-        if (currentSelectedCard.length !== 2) {
-            const inner2 = card.querySelector('.flip-card-inner')
-            if (currentSelectedCard.length === 1) {
-                const inner1 = currentSelectedCard[0].querySelector(".flip-card-inner")
-                if (inner1.id !== inner2.id) {
+    
+            if (currentSelectedCard.length !== 2) {
+                const inner2 = card.querySelector('.flip-card-inner')
+                if (currentSelectedCard.length === 1) {
+                    const inner1 = currentSelectedCard[0].querySelector(".flip-card-inner")
+                    if (inner1.id !== inner2.id) {
+                        flipCard(inner2)
+                    }
+                }
+                else {
                     flipCard(inner2)
                 }
             }
-            else {
-                flipCard(inner2)
+    
+    
+    
+            if (currentSelectedCard.length === 2) {
+                setTimeout(() => {
+                    const inner1 = currentSelectedCard[0].querySelector(".flip-card-inner")
+                    const inner2 = currentSelectedCard[1].querySelector(".flip-card-inner")
+    
+                    // console.log(inner1.classList[1], inner2.classList[1])
+                    if (!(inner1.classList[1] === inner2.classList[1])) {
+                        inner1.classList.remove("rotate");
+                        inner2.classList.remove("rotate");
+                    }
+    
+                    else {
+                        inner1.classList.add("fixed")
+                        inner2.classList.add("fixed")
+                    }
+                    currentSelectedCard = []
+                }, 700)
+    
             }
-        }
-
-
-
-        if (currentSelectedCard.length === 2) {
-            setTimeout(() => {
-                const inner1 = currentSelectedCard[0].querySelector(".flip-card-inner")
-                const inner2 = currentSelectedCard[1].querySelector(".flip-card-inner")
-
-                // console.log(inner1.classList[1], inner2.classList[1])
-                if (!(inner1.classList[1] === inner2.classList[1])) {
-                    inner1.classList.remove("rotate");
-                    inner2.classList.remove("rotate");
-                }
-
-                else {
-                    inner1.classList.add("fixed")
-                    inner2.classList.add("fixed")
-                }
-                currentSelectedCard = []
-            }, 700)
-
         }
     })
 );

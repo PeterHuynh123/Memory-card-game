@@ -1,3 +1,4 @@
+@import url('https://fonts.cdnfonts.com/css/valorant');
 :root {
     /* CSS variables */
     --bg-color: #111;
@@ -11,13 +12,24 @@ body {
     padding: 0;
     background-color: var(--bg-color);
     color: white;
+    font-family: 'VALORANT', sans-serif;
+    background-image: url("./assets/bg.jpg");
 }
 
-h1 {
-    color: white;
-    background-color: pink;
+#timer-box {
+    height: 10px;
+    width: 100vw;
+    background-color: #FFFBF5;
+}
+
+
+#header {
+    display: flex;
+    color: #FFFBF5;
+    background-color: #FD4556;
     margin: 0;
-    padding: 0;
+    padding: 10px;
+    justify-content: center;
 }
 .container {
     display: flex;
@@ -26,6 +38,17 @@ h1 {
     justify-content: center;
     width: 100vw;
     height: 100vh;
+}
+
+#timer {
+    font-family: Helvetica, sans-serif;
+}
+
+.container #timer{
+    color: #FD4556;
+    position: absolute;
+    font-size: 300px;
+
 }
 
 .card-grid {
@@ -41,6 +64,11 @@ h1 {
     height: 200px;
     /* border: 1px solid #f1f1f1; */
     /* perspective: 1000px; Remove this if you don't want the 3D effect */
+}
+
+#timer {
+    display: flex;
+    justify-content: center;
 }
 
 /* This container is needed to position the front and back side */
