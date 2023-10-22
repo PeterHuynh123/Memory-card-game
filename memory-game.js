@@ -1,36 +1,50 @@
 const cardGrid = document.querySelector('.card-grid')
 const timer = document.querySelector('#timer')
 const timerBox = document.querySelector('#timer-box')
+const timer3s = document.querySelector('.timer3s')
 
 const milisec = 10
-const playTime = 30 * milisec
+const playTime = 5 * milisec
 let currentPlayTime = playTime
 let gameIsRunning = true
 let gameCompleted = false
+console.log(gameIsRunning)
 
-const setIntervalfunction = setInterval(() => {
-    if (currentPlayTime != -1) {
-        timer.textContent = `${(currentPlayTime/milisec).toFixed(1)}`;
-        currentPlayTime -= 1
-        timerBox.style.width =  `${(currentPlayTime/playTime)*100}vw` 
-    }
-    else {
-        timer.textContent = "TIMEOUT"
-        return false
-    }
-    
-    return true
-    
-}, 100)
+let isRunning = null
+
+const setTimer = () => {
+    const setIntervalId = setInterval(() => {
+        if (currentPlayTime <= 3 * milisec) {
+            timer3s.innerHTML = timer.innerHTML
+            timer3s.style.display = "block"
+            timer.style.display = "none"
+        }
+        if (currentPlayTime != -1) {
+            timer.textContent = `${(currentPlayTime/milisec).toFixed(1)}`;
+            currentPlayTime -= 1
+            timerBox.style.width =  `${(currentPlayTime/playTime)*100}vw` 
+        }
+        else {
+            // timer3s.style.display = "block"
+            timer3s.style.fontSize = "300px"
+            timer3s.style.color = "rgba(253, 69, 86, 1)"
+            timer3s.textContent = "TIMEOUT"
+            timer3s.style.zIndex = "1"
+            timer3s.style.WebkitTextstrokeWidth = "4px"; 
+            timer3s.style.WebkitTextstrokeColor = "black"; 
+            gameIsRunning =  false
+            clearInterval(setIntervalId)
+        }
+    }, 100)
+} 
+
+setTimer()
 
 // setInterval(() => {
 //     timerBox.style.width = `${Math.floor((currentPlayTime/playTime*100)*100)}vw`
 // }, 1)
 
 
-if (gameIsRunning) {
-    gameIsRunning = setIntervalfunction
-}
 
 
 // const AGENT = ['jett', 'chamber', 'yoru', 'omen', 'harbor', 'reyna']
@@ -40,7 +54,7 @@ let currentSelectedCard = []
 // newElement.innerHTML = 'hello this p is created using Js'
 // cardGrid.appendChild(newElement)
 
-const gameBoard = [
+let gameBoard = [
     [],
     [],
     []
@@ -59,52 +73,77 @@ const createCard = (id, agent) => `
     </div>
 `
 
-let agentCounter = 0
-let agentIndexCount = 0
+const makeGame = (gameBoard, AGENTS, cardGrid) => {
+    currentSelectedCard = []
+    gameBoard = [
+        [],
+        [],
+        []
+    ]
+    cardGrid.innerHTML = ''
+    currentPlayTime = playTime
+    gameIsRunning = true
 
-for (let i = 0; i < 3; i++) {
-    for (let j = 0; j < 2; j++) {
-        for (let k = 0; k < 2; k++) {
-            const newCard = createCard(agentIndexCount, AGENTS[agentCounter])
-            gameBoard[i].push(AGENTS[agentCounter])
-            cardGrid.innerHTML += newCard
+    timer3s.style.display = "none"
+    timer.style.display = "block"
 
-            agentIndexCount++
+
+    
+
+    let agentCounter = 0
+    let agentIndexCount = 0
+
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 2; j++) {
+            for (let k = 0; k < 2; k++) {
+                gameBoard[i].push(AGENTS[agentCounter])
+                agentIndexCount++
+            }
+            agentCounter++
         }
-        agentCounter++
     }
+    
+    cardGrid.innerHTML = ''
+    
+    for (let i = 0; i < 3; i++) {
+        for (let k = 0; k < 4; k++) {
+            const randRowIndex = Math.floor(Math.random() * 3)
+            const randCollumnIndex = Math.floor(Math.random() * 4)
+    
+            let tempHolder = gameBoard[i][k]
+    
+            gameBoard[i][k] = gameBoard[randRowIndex][randCollumnIndex]
+            gameBoard[randRowIndex][randCollumnIndex] = tempHolder
+    
+            cardGrid.innerHTML += gameBoard[i][k]
+        }
+    }
+    
+    
+    
+    let secondAgentIndexCounter = 0
+    cardGrid.innerHTML = ''
+    
+    for (let i = 0; i < 3; i++) {
+        for (let k = 0; k < 4; k++) {
+            cardGrid.innerHTML += createCard(secondAgentIndexCounter, gameBoard[i][k])
+            secondAgentIndexCounter++
+        }
+    }
+
+    setTimer()
 }
 
-cardGrid.innerHTML = ''
 
-for (let i = 0; i < 3; i++) {
-    for (let k = 0; k < 4; k++) {
-        const randRowIndex = Math.floor(Math.random() * 3)
-        const randCollumnIndex = Math.floor(Math.random() * 4)
+makeGame(gameBoard, AGENTS, cardGrid)
 
-        let tempHolder = gameBoard[i][k]
-
-        gameBoard[i][k] = gameBoard[randRowIndex][randCollumnIndex]
-        gameBoard[randRowIndex][randCollumnIndex] = tempHolder
-
-        cardGrid.innerHTML += gameBoard[i][k]
-    }
-}
-
-let secondAgentIndexCounter = 0
-cardGrid.innerHTML = ''
-
-for (let i = 0; i < 3; i++) {
-    for (let k = 0; k < 4; k++) {
-        cardGrid.innerHTML += createCard(secondAgentIndexCounter, gameBoard[i][k])
-        secondAgentIndexCounter++
-    }
-}
-
+console.log(cardGrid)
 
 
 
 const cards = document.querySelectorAll(".flip-card");
+
+console.log(gameIsRunning)
 
 cards.forEach((card) =>
     card.addEventListener("click", (event) => {
@@ -157,6 +196,9 @@ cards.forEach((card) =>
                 }, 700)
     
             }
+        }
+        else {
+            makeGame(gameBoard, AGENTS, cardGrid)
         }
     })
 );

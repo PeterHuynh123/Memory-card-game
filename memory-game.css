@@ -40,15 +40,27 @@ body {
     height: 100vh;
 }
 
-#timer {
-    font-family: Helvetica, sans-serif;
+.container .card-grid{
+    position: absolute;
 }
 
-.container #timer{
-    color: #FD4556;
-    position: absolute;
-    font-size: 300px;
+.timer3s {
+    display: none;
+    z-index: -1;
+    /* font-family: "TungstenRounded-Bold"; */
+    color: rgba(253, 69, 86, 0.8);
+    font-size: 800px;
+    user-select: none;
+    -webkit-text-stroke-width: 3px; 
+    -webkit-text-stroke-color: black; 
+}
 
+.timer3s:hover {
+    cursor: default;
+}
+
+#timer {    
+    font-family: 'VALORANT', sans-serif;
 }
 
 .card-grid {
