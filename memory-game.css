@@ -48,8 +48,8 @@ body {
     display: none;
     z-index: -1;
     /* font-family: "TungstenRounded-Bold"; */
+    font-size: "800px";
     color: rgba(253, 69, 86, 0.8);
-    font-size: 800px;
     user-select: none;
     -webkit-text-stroke-width: 3px; 
     -webkit-text-stroke-color: black; 
@@ -60,6 +60,7 @@ body {
 }
 
 #timer {    
+    display: flex;
     font-family: 'VALORANT', sans-serif;
 }
 

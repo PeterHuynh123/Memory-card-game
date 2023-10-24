@@ -3,20 +3,18 @@ const timer = document.querySelector('#timer')
 const timerBox = document.querySelector('#timer-box')
 const timer3s = document.querySelector('.timer3s')
 
-const milisec = 10
+const milisec = 100
 const playTime = 5 * milisec
+
+
 let currentPlayTime = playTime
 let gameIsRunning = true
-let gameCompleted = false
-console.log(gameIsRunning)
-
-let isRunning = null
-
 const setTimer = () => {
     const setIntervalId = setInterval(() => {
         if (currentPlayTime <= 3 * milisec) {
             timer3s.innerHTML = timer.innerHTML
             timer3s.style.display = "block"
+            timer3s.style.fontSize = "800px";
             timer.style.display = "none"
         }
         if (currentPlayTime != -1) {
@@ -35,10 +33,11 @@ const setTimer = () => {
             gameIsRunning =  false
             clearInterval(setIntervalId)
         }
-    }, 100)
+    }, 10)
 } 
 
-setTimer()
+
+// setTimer()
 
 // setInterval(() => {
 //     timerBox.style.width = `${Math.floor((currentPlayTime/playTime*100)*100)}vw`
@@ -85,8 +84,9 @@ const makeGame = (gameBoard, AGENTS, cardGrid) => {
     gameIsRunning = true
 
     timer3s.style.display = "none"
-    timer.style.display = "block"
+    timer.style.display = "flex"
 
+    timer3s.style.zIndex = "-1"
 
     
 
@@ -135,9 +135,9 @@ const makeGame = (gameBoard, AGENTS, cardGrid) => {
 }
 
 
+
 makeGame(gameBoard, AGENTS, cardGrid)
 
-console.log(cardGrid)
 
 
 
@@ -202,3 +202,5 @@ cards.forEach((card) =>
         }
     })
 );
+    
+
