@@ -47,7 +47,7 @@ const setTimer = () => {
 
 
 // const AGENT = ['jett', 'chamber', 'yoru', 'omen', 'harbor', 'reyna']
-let AGENTS = ['jett', 'chamber', 'yoru', 'omen', 'harbor', 'reyna', 'jett', 'chamber', 'yoru', 'omen', 'harbor', 'reyna']
+const AGENTS = ['jett', 'chamber', 'yoru', 'omen', 'harbor', 'reyna', 'jett', 'chamber', 'yoru', 'omen', 'harbor', 'reyna']
 let currentSelectedCard = []
 // const newElement = document.createElement('p')
 // newElement.innerHTML = 'hello this p is created using Js'
