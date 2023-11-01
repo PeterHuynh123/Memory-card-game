@@ -2,20 +2,28 @@ const cardGrid = document.querySelector('.card-grid')
 const timer = document.querySelector('#timer')
 const timerBox = document.querySelector('#timer-box')
 const timer3s = document.querySelector('.timer3s')
+const scoreElement = document.querySelector('#score')
+
 
 const milisec = 100
-const playTime = 5 * milisec
-
-
+const playTime = 10 * milisec
 let currentPlayTime = playTime
 let gameIsRunning = true
-const setTimer = () => {
+let gameCompleted = false
+
+let isRunning = null
+
+let score = 100 
+
+let cardTimeout = null
+score = Math.floor((currentPlayTime/playTime) * 100)
+const setTimer = (score) => {
     const setIntervalId = setInterval(() => {
-        if (currentPlayTime <= 3 * milisec) {
+        if (currentPlayTime <= (5 * milisec)) {
             timer3s.innerHTML = timer.innerHTML
-            timer3s.style.display = "block"
-            timer3s.style.fontSize = "800px";
+            timer3s.style.display = "flex"
             timer.style.display = "none"
+            timer3s.style.fontSize = "800px"
         }
         if (currentPlayTime != -1) {
             timer.textContent = `${(currentPlayTime/milisec).toFixed(1)}`;
@@ -33,9 +41,22 @@ const setTimer = () => {
             gameIsRunning =  false
             clearInterval(setIntervalId)
         }
+
+
+        if (score >= 0) {
+            score -= (((currentPlayTime+1)/playTime)*100 - (currentPlayTime/playTime)*100)
+        }
+        
+        
+
+        
+        scoreElement.textContent = `Score: ${score.toFixed(0)}`
+
+        console.log(score)
+
+        
     }, 10)
 } 
-
 
 // setTimer()
 
@@ -47,7 +68,7 @@ const setTimer = () => {
 
 
 // const AGENT = ['jett', 'chamber', 'yoru', 'omen', 'harbor', 'reyna']
-const AGENTS = ['jett', 'chamber', 'yoru', 'omen', 'harbor', 'reyna', 'jett', 'chamber', 'yoru', 'omen', 'harbor', 'reyna']
+let AGENTS = ['jett', 'chamber', 'yoru', 'omen', 'harbor', 'reyna', 'jett', 'chamber', 'yoru', 'omen', 'harbor', 'reyna']
 let currentSelectedCard = []
 // const newElement = document.createElement('p')
 // newElement.innerHTML = 'hello this p is created using Js'
@@ -72,7 +93,7 @@ const createCard = (id, agent) => `
     </div>
 `
 
-const makeGame = (gameBoard, AGENTS, cardGrid) => {
+const makeGame = (gameBoard, AGENTS, cardGrid, score) => {
     currentSelectedCard = []
     gameBoard = [
         [],
@@ -84,9 +105,11 @@ const makeGame = (gameBoard, AGENTS, cardGrid) => {
     gameIsRunning = true
 
     timer3s.style.display = "none"
-    timer.style.display = "flex"
-
+    timer.style.display = "block"
     timer3s.style.zIndex = "-1"
+
+    score = 100
+
 
     
 
@@ -131,22 +154,13 @@ const makeGame = (gameBoard, AGENTS, cardGrid) => {
         }
     }
 
-    setTimer()
-}
-
-
-
-makeGame(gameBoard, AGENTS, cardGrid)
-
-
+    setTimer(score)
 
 
 const cards = document.querySelectorAll(".flip-card");
 
-console.log(gameIsRunning)
-
 cards.forEach((card) =>
-    card.addEventListener("click", (event) => {
+    card.addEventListener("click", (event, score) => {
         if (gameIsRunning) {
             const flipCard = function (inner) {
                 if (!inner.classList.contains('fixed')) {
@@ -175,32 +189,48 @@ cards.forEach((card) =>
                 }
             }
     
-    
+            const cardFlipping = () => {
+                const inner1 = currentSelectedCard[0].querySelector(".flip-card-inner")
+                const inner2 = currentSelectedCard[1].querySelector(".flip-card-inner")
+
+                if (!(inner1.classList[1] === inner2.classList[1])) {
+                    inner1.classList.remove("rotate");
+                    inner2.classList.remove("rotate");
+                }
+
+                else {
+                    inner1.classList.add("fixed")
+                    inner2.classList.add("fixed")
+                    score += 10
+
+                    console.log(score, scoreElement)
+                }
+                currentSelectedCard = []
+
+            }
     
             if (currentSelectedCard.length === 2) {
-                setTimeout(() => {
-                    const inner1 = currentSelectedCard[0].querySelector(".flip-card-inner")
-                    const inner2 = currentSelectedCard[1].querySelector(".flip-card-inner")
-    
-                    // console.log(inner1.classList[1], inner2.classList[1])
-                    if (!(inner1.classList[1] === inner2.classList[1])) {
-                        inner1.classList.remove("rotate");
-                        inner2.classList.remove("rotate");
-                    }
-    
-                    else {
-                        inner1.classList.add("fixed")
-                        inner2.classList.add("fixed")
-                    }
-                    currentSelectedCard = []
-                }, 700)
-    
+                cardTimeout =  setTimeout(cardFlipping, 700)
+            }
+            else {
+                clearTimeout(cardTimeout)
+                cardFlipping()
             }
         }
         else {
-            makeGame(gameBoard, AGENTS, cardGrid)
+            makeGame(gameBoard, AGENTS, cardGrid, score)
         }
     })
 );
-    
+}
 
+makeGame(gameBoard, AGENTS, cardGrid, score)
+
+
+timer3s.addEventListener('click', () => {
+    console.log('clicking on timer text');
+    makeGame(gameBoard, AGENTS, cardGrid, score)
+    
+})
+
+    

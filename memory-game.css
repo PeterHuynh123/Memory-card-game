@@ -45,9 +45,10 @@ body {
 }
 
 .timer3s {
-    display: none;
+    display: flex;
     z-index: -1;
     /* font-family: "TungstenRounded-Bold"; */
+    justify-content: center;
     font-size: "800px";
     color: rgba(253, 69, 86, 0.8);
     user-select: none;
