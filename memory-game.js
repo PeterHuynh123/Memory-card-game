@@ -6,7 +6,7 @@ const scoreElement = document.querySelector('#score')
 
 
 const milisec = 100
-const playTime = 10 * milisec
+const playTime = 30 * milisec
 let currentPlayTime = playTime
 let gameIsRunning = true
 let gameCompleted = false
